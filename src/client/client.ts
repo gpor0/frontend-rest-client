@@ -1,7 +1,7 @@
 import { RequestCredentials, RequestMode } from "undici-types/fetch";
 import { ClientRequest, ClientResponse, FetchFrontendClientOptions, FrontendClient } from "../interfaces";
 import { prepareQuery } from "../utils/queryUtils";
-import { isDefined, isFunction, isObject } from "../utils/validators";
+import { isArray, isDefined, isFunction, isObject } from "../utils/validators";
 
 /**
  * Initializes FetchFrontendClient instance
@@ -77,7 +77,7 @@ class FetchFrontendClient implements FrontendClient {
       fetchRequest.headers[contentTypeHeader] = "application/json";
     }
 
-    if (fetchRequest.headers[contentTypeHeader] === "application/json" && isObject(requestPayload)) {
+    if (fetchRequest.headers[contentTypeHeader] === "application/json" && (isObject(requestPayload) || isArray(requestPayload))) {
       fetchRequest.body = JSON.stringify(requestPayload);
     } else {
       fetchRequest.body = requestPayload;
