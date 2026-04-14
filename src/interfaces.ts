@@ -157,7 +157,7 @@ export interface ClientRequest<RequestBody> {
   url: string;
   pathParams?: { [queryParam: string]: string | number | Date };
   query?: { [queryParam: string]: QueryParamValueType };
-  data: RequestBody;
+  data?: RequestBody;
   headers?: { [key: string]: unknown };
 }
 
